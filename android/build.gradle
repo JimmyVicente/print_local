@@ -51,8 +51,13 @@ android {
             }
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
-    implementation files('libs\\printer.jar')
+    implementation files('libs/printer.jar')
 }
