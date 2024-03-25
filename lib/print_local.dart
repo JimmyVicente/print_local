@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:print_local/model.dart';
@@ -7,6 +8,7 @@ class PrintLocal {
   final methodChannel = const MethodChannel('print_local');
 
   Future<PrintResult> isPrintNative() async {
+    if (!Platform.isAndroid) PrintResult.notPlatform;
     var value = 5;
     try {
       var val = await methodChannel.invokeMethod<int?>('isPrintNative');
@@ -19,6 +21,9 @@ class PrintLocal {
 
   Future<ObjectPrintResult> printNative(Uint8List image) async {
     var message = "unknown error flutter";
+    if (!Platform.isAndroid) {
+      return ObjectPrintResult(PrintResult.notPlatform, message, -10);
+    }
     var valueR = ObjectPrintResult(PrintResult.unknownError, message, -10);
     try {
       var imageBase64 = base64Encode(image);
