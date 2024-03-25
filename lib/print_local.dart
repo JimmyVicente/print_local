@@ -22,14 +22,7 @@ class PrintLocal {
     var message = "unknown error flutter";
     var valueR = ObjectPrintResult(PrintResult.unknownError, message, -10);
     try {
-      var size = await getSizeImage(image);
-      size = getResizedSize(size, 380); //380 width
-      var imageAux = await renderSizeIcon(
-        image,
-        size.width.toInt(),
-        size.height.toInt(),
-      );
-      var imageBase64 = base64Encode(imageAux!);
+      var imageBase64 = base64Encode(image);
       final data = await methodChannel.invokeMethod('printNative', {
         'imageBase64': imageBase64,
       });
