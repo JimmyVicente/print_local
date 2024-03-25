@@ -29,7 +29,7 @@ class PrintLocal {
         size.width.toInt(),
         size.height.toInt(),
       );
-      var imageBase64 = base64Encode(imageAux);
+      var imageBase64 = base64Encode(imageAux!);
       final data = await methodChannel.invokeMethod('printNative', {
         'imageBase64': imageBase64,
       });
